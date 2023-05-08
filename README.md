@@ -1,2 +1,3 @@
-# ML_deployment_proj
-An End to End ML project deployment
+# End to End Machine Learning Project
+
+This project details 
