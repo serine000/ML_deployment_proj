@@ -1,2 +1,4 @@
 venv/
 .env
+ML_project.egg-info/
+/logs
