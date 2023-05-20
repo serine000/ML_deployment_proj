@@ -2,6 +2,7 @@
 Exception file for handling exceptions in the code
 """
 import sys
+from src.logger import logging
 
 
 def error_message_detail(error, error_details:sys):
