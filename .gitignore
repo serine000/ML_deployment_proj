@@ -2,3 +2,5 @@ venv/
 .env
 ML_project.egg-info/
 /logs
+__pycache__/
+artifacts
