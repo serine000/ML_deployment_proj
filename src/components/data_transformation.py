@@ -1,39 +1,41 @@
+"""
+This module is in charge of handling the data processing of the data 
+and generate a processing pickle object.
+"""
 import sys
 from dataclasses import dataclass
-
+import os
 import numpy as np 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
+from config.configurations import Configruation
 
 from src.exception import CustomException
 from src.logger import logging
-import os
 
 from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig():
+    """Configurations for data transformation"""
     preprocessor_obj_file_path = os.path.join('artifacts', "preprocessor.pkl")
 
 class DataTransformation():
+    """Data transformation class"""
     def __init__(self):
         self.data_transformation_config = DataTransformationConfig()
+        self.configuration = Configruation()
 
     def initiate_data_processor(self):
         """This functions applies data processing on numerical and categorical data"""
 
         try:
-            numerical_columns = ["writing_score", "reading_score"]
-            categorical_columns = [
-                "gender",
-                "race/ethnicity",
-                "parental level of education",
-                "lunch",
-                "test preparation course",
-            ]
+            numerical_columns = self.configuration.numerical_columns
+            categorical_columns = self.configuration.categorical_columns
+
             num_pipeline= Pipeline(
                 steps=[
                     ("imputer",SimpleImputer(strategy="median")),
@@ -59,8 +61,8 @@ class DataTransformation():
 
             return preprocessor
 
-        except Exception as e:
-            raise CustomException(e, sys)
+        except Exception as error_data_processor_initiation:
+            raise CustomException(error_data_processor_initiation, sys)
 
     def initiate_data_transformation(self, train_path, test_path):
         """Apply the data transormation on the train and test splits"""
@@ -74,7 +76,7 @@ class DataTransformation():
             logging.info("Obtaining preprocessing object")
             preprocessor_obj = self.initiate_data_processor()
 
-            target_column_name = "math_score"
+            target_column_name = self.configuration.target_column
 
             input_feature_train_df=train_df.drop([target_column_name], axis=1)
             target_feature_train_df=train_df[target_column_name]
@@ -83,7 +85,7 @@ class DataTransformation():
             target_feature_test_df=test_df[target_column_name]
 
             logging.info(
-                f"Applying preprocessing object on training dataframe and testing dataframe."
+                "Applying preprocessing object on training dataframe and testing dataframe."
             )
 
             input_feature_train_arr = preprocessor_obj.fit_transform(input_feature_train_df)
@@ -107,5 +109,5 @@ class DataTransformation():
                 self.data_transformation_config.preprocessor_obj_file_path
             )
 
-        except Exception as e:
-            raise CustomException(e, sys)
+        except Exception as error_initiating_data_transformation:
+            raise CustomException(error_initiating_data_transformation, sys)

@@ -1,8 +1,9 @@
-# Create our machine learning application as a package with deployment
-# Setting up the meta-data of our project
-
-from setuptools import find_packages, setup
+"""
+Create our machine learning application as a package with deployment
+Setting up the meta-data of our project
+"""
 from typing import List
+from setuptools import find_packages, setup
 
 HYPHEN_E_DOT="-e ."
 def get_requirements(file_path: str) -> List:
@@ -14,8 +15,7 @@ def get_requirements(file_path: str) -> List:
         requirements = [req.replace("\n", "") for req in requirements]
 
         if HYPHEN_E_DOT in requirements:
-            requirements.remove(HYPHEN_E_DOT)
-    
+            requirements.remove(HYPHEN_E_DOT)   
     return requirements
 
 
@@ -26,6 +26,4 @@ setup(
     author_email="serine_md@hotmail.com",
     packages=find_packages(),
     install_requires=get_requirements("requirements.txt"),
-
 )
-
