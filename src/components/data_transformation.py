@@ -11,7 +11,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder,StandardScaler
-from config.configurations import Configruation
+from src.config.configurations import Configruation
 
 from src.exception import CustomException
 from src.logger import logging
