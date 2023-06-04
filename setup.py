@@ -1,6 +1,6 @@
 """
-Create our machine learning application as a package with deployment
-Setting up the meta-data of our project
+Create a machine learning application as a package with deployment,
+and up the meta-data of our project.
 """
 from typing import List
 from setuptools import find_packages, setup

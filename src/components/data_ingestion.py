@@ -1,8 +1,11 @@
+"""
+This module is responsible for reading data from a source and saving it into artifacts.
+"""
 import os
 import sys
+import pandas as pd
 from src.exception import CustomException
 from src.logger import logging
-import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation, DataTransformationConfig

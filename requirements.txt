@@ -6,4 +6,6 @@ matplotlib
 scikit-learn
 xgboost
 dill
+pytest
+pytest-env
 #-e .
