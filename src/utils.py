@@ -10,7 +10,8 @@ from sklearn.model_selection import GridSearchCV
 
 def save_object(destination_save_path, object_to_save):
     """
-    Save the object_to_save into the destination_save_path as a pickled object.
+    Save the object_to_save into the destination_save_path 
+    as a pickled object.
     """
     try:
         dir_path = os.path.dirname(destination_save_path)
@@ -23,7 +24,14 @@ def save_object(destination_save_path, object_to_save):
     except Exception as error_pickling_object:
         raise CustomException(error_pickling_object, sys)
 
-def evaluate_models(train_features, test_features, train_labels, test_labels, models, params) -> dict():
+def evaluate_models(
+    train_features, 
+    test_features, 
+    train_labels, 
+    test_labels, 
+    models, 
+    params
+    ) -> dict():
     """Function that evaluates a model given its parameters and training data."""
     
     try:
@@ -50,5 +58,15 @@ def evaluate_models(train_features, test_features, train_labels, test_labels, mo
 
         return report
 
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+def load_object(file_path: str):
+    """function to load artifacts"""
+    
+    try:
+        print(file_path)
+        with open(file_path, "rb") as file_obj:
+            return dill.load(file_obj)
     except Exception as e:
         raise CustomException(e, sys)
