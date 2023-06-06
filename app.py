@@ -1,6 +1,10 @@
-from flask import Flask, request, render_template
+"""
+This module is responsible of the web interface of the application using flask
+"""
 import numpy as np
 import pandas as pd
+from flask import Flask, request, render_template
+
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 
 application=Flask(__name__)
