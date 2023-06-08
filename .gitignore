@@ -7,3 +7,4 @@ artifacts
 .artifacts/
 __pycache__
 logs
+.idea/

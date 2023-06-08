@@ -13,11 +13,15 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-Note: You can exit from this environent later by running `deactivate` in your terminal.
+Note: You can exit from this environment later by running `deactivate` in your terminal.
 
-2. Launch the setup.py file by running the instruciton below, to download all necessary requirements and dependencies into your virtual environment. This also build the entire project and turns it into a package.
+2. Launch the setup.py file by running the instruction below to download all necessary requirements and dependencies into your virtual environment. This also build the entire project and turns it into a package.
 ```
 pip3 install .
 ```
 
-3. 
+3. At any moment of you update the README library and need to download the new packages, run the 
+    below instruction when inside your virtual environment terminal:
+```
+pip3 install -r requirements.txt
+```
