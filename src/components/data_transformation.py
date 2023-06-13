@@ -48,7 +48,7 @@ class DataTransformation():
             cat_pipeline = Pipeline(
                     steps = [
                         ("imputer", SimpleImputer(strategy = "most_frequent")),
-                        ("ome_hot_encoding", OneHotEncoder()),
+                        ("one_hot_encoding", OneHotEncoder()),
                         ("scaler", StandardScaler(with_mean = False))
                         ]
                     )
@@ -62,10 +62,6 @@ class DataTransformation():
                     )
 
             logging.info("Saved preprocessing object.")
-            save_object(
-                    destination_save_path = self.data_transformation_config.preprocessor_obj_path,
-                    object_to_save = preprocessor
-                    )
 
             return preprocessor
 
@@ -101,6 +97,12 @@ class DataTransformation():
             # preprocess the training and testing features
             processed_training_features = preprocessor_object.fit_transform(input_feature_train_df)
             processed_testing_features = preprocessor_object.transform(input_feature_test_df)
+
+            # Saving the preprocessor after we fit it.
+            save_object(
+                    destination_save_path = self.data_transformation_config.preprocessor_obj_path,
+                    object_to_save = preprocessor_object
+                    )
 
             train_data_array = np.c_[
                 processed_training_features, np.array(target_feature_train_df)

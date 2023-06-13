@@ -25,3 +25,17 @@ pip3 install .
 ```
 pip3 install -r requirements.txt
 ```
+
+4. To run the local training pipeline and have the model and preprocessor artifacts saved,
+run the following command in your terminal:
+```
+python3 main.py
+```
+This will trigger training your data and save the artifacts.
+
+5. To run the flask web app to use our model there run:
+```angular2html
+python3 app.py
+```
+and open `localhost:5005` in your browser, this will give you the landing page of the application.
+Go to `localhost:5005/predictdata` to perform a data prediction and view your results in the web browser.

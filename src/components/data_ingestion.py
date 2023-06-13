@@ -5,15 +5,12 @@ import os
 import sys
 from dataclasses import dataclass
 
-import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from src.config.configurations import Configuration
 from src.data_access.data_source import DataSource
 from src.exception import CustomException
 from src.logger import logging
-from src.components.data_transformation import DataTransformation, DataTransformationConfig
-from src.components.model_trainer import ModelTrainer
 
 
 @dataclass
