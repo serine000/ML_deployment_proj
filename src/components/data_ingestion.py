@@ -8,6 +8,7 @@ from dataclasses import dataclass
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+from src.config.configurations import Configuration
 from src.data_access.data_source import DataSource
 from src.exception import CustomException
 from src.logger import logging
@@ -23,9 +24,10 @@ class DataIngestionConfig:
 
 
 class DataIngestion:
-    def __init__(self, data_source: DataSource):
+    def __init__(self, data_source: DataSource, configuration: Configuration):
         self.ingestion_config = DataIngestionConfig()
         self.data_source = data_source
+        self.configuration = configuration
 
     def save_data_artifacts(self, data, data_path, create_dir_flag: bool) -> None:
         """Saves data as CSV artifacts"""
@@ -49,7 +51,7 @@ class DataIngestion:
         try:
             # Fetch data to be ingested in a dataframe form
             input_dataframe = self.data_source.fetch_input_data(
-                    'notebook/data/StudentsPerformance.csv'
+                    self.configuration.csv_data_source_path
                     )
             logging.info("Read the dataset as a Pandas dataframe")
 

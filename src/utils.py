@@ -3,10 +3,13 @@ This module is responsible for grouping utility functions used throughout the pr
 """
 import os
 import sys
+
 import dill
-from src.exception import CustomException
+import pandas as pd
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
+
+from src.exception import CustomException
 
 
 def save_object(destination_save_path, object_to_save):
@@ -78,3 +81,8 @@ def load_object(file_path: str):
 def check_file_exists(file_name):
     """Check if file exists"""
     return os.path.exists(file_name)
+
+
+def read_csv_artifacts(artifact_file_name) -> pd.DataFrame:
+    """return the csv artifact as a pandas dataframe"""
+    return pd.read_csv(artifact_file_name)
