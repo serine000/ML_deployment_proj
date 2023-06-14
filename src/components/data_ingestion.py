@@ -3,6 +3,7 @@ This module is responsible for reading data from a source and saving it into art
 """
 import os
 import sys
+from pathlib import Path
 from dataclasses import dataclass
 
 from sklearn.model_selection import train_test_split
@@ -31,7 +32,11 @@ class DataIngestion:
 
         if create_dir_flag:
             # Ensure there is a directory to store the artifacts.
-            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok = True)
+
+            myfile = Path(self.ingestion_config.train_data_path)
+            myfile.touch(exist_ok = True)
+            f = open(myfile)
+            # os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok = True)
 
         # Save the input raw data in a csv file in the artifact folder.
         data.to_csv(
